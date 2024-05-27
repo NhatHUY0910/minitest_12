@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html  xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/another_view/layout :: head">
+    <meta charset="UTF-8">
+    <title>Search Results</title>
+</head>
+<body>
+
+    <h3>Search Results</h3>
+    <p><a th:href="@{/computers}">Back To Computer List</a></p>
+
+    <div style="margin-bottom: 10px; margin-left: 100px">
+        <form th:action="@{/computers/search}" method="get">
+            <label><input type="text" name="search"></label>
+            <button type="submit" class="btn btn-primary">Search</button>
+        </form>
+    </div>
+
+    <table id="computers">
+        <thead>
+        <tr>
+            <th>STT</th>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Producer</th>
+            <th>Type</th>
+            <th>Update</th>
+            <th>Delete</th>
+        </tr>
+        </thead>
+        <tbody>
+            <tr th:each="c, cStatus : ${computers.getContent()}">
+                <td th:text="${cStatus.count}"></td>
+                <td th:text="${c.getCode()}"></td>
+                <td th:text="${c.getName()}"></td>
+                <td th:text="${c.getProducer()}"></td>
+                <td th:text="${c.getTypeComputer().getName()}"></td>
+                <td><a th:href="@{/computers/update-computer/{id}(id=${c.getId()})}">Update</a></td>
+                <td><a th:href="@{/computers/delete/{id}(id=${c.getId()})}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+
+    <a class="btn btn-primary" th:if="${computers.hasPrevious()}" th:href="@{/computers/search(page=${computers.number - 1}, size=${computers.size}, search=${search})}">Previous</a>
+
+    <span th:text="${computers.number + 1}"></span> | <span th:text="${computers.totalPages}"></span>
+
+    <a class="btn btn_primary" th:if="${computers.hasNext()}" th:href="@{/computers/search(page=${computers.number + 1}, size=${computers.size}, search=${search})}">Next</a>
+
+    <footer th:replace="/another_view/layout :: footer"></footer>
+
+</body>
+</html>

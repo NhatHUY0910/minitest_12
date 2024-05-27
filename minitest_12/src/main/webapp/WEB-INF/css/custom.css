@@ -1,0 +1,22 @@
+header{
+    background-color: #000000;
+    color: #fff;
+    padding: 16px;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+}
+
+footer{
+    background-color: black;
+    color: #fff;
+    padding: 16px;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 1000;
+    /*text-align: center;*/
+}

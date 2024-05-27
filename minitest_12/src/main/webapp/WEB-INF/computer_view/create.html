@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/another_view/layout :: head">
+    <meta charset="UTF-8">
+    <title>Create Computer Form</title>
+</head>
+<body>
+
+    <h3>Add New Computer</h3>
+    <p><a th:href="@{/computers}">Back To Computer List</a></p>
+
+    <div id="form">
+        <form th:action="@{/computers/save-computer}" th:object="${computer}" method="post" novalidate="novalidate">
+            <input type="hidden" th:field="*{id}"/>
+            <div>
+                <label for="code">Code</label>
+                <input type="text" id="code" th:field="*{code}"/>
+                <div th:if="${#fields.hasErrors('code')}" th:errors="*{code}"></div>
+            </div>
+            <div>
+                <label for="name">Name</label>
+                <input type="text" id="name" th:field="*{name}">
+                <div th:if="${#fields.hasErrors('name')}" th:errors="*{name}"></div>
+            </div>
+            <div>
+                <label for="producer">Producer</label>
+                <input type="text" id="producer" th:field="*{producer}">
+                <div th:if="${#fields.hasErrors('producer')}" th:errors="*{producer}"></div>
+            </div>
+            <div>
+                <label for="type">Type</label>
+                <select name="" id="type" th:field="*{typeComputer}">
+                    <option th:each="t : ${types}" th:value="${t.id}" th:text="${t.name}"></option>
+                </select>
+            </div>
+            <input type="submit" value="Save"/>
+        </form>
+    </div>
+    <footer th:replace="/another_view/layout :: footer"></footer>
+
+</body>
+</html>

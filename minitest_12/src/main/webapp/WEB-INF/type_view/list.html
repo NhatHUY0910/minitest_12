@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="en">
+<head th:replace="/another_view/layout :: head">
+    <meta charset="UTF-8">
+    <title>Type List</title>
+</head>
+<body>
+
+    <h3>Computer Type List</h3>
+    <p><a th:href="@{/create-type}">Add New Type</a></p>
+
+    <p><a th:href="@{/computers}">Computer List</a></p>
+
+    <div class="notify">
+        <div th:if="${message}"><span th:text="${message}"></span></div>
+    </div>
+
+    <table id="computers">
+        <thead>
+            <tr>
+                <th>STT</th>
+                <th>Name</th>
+                <th>Update</th>
+                <th>Delete</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="tc, tcStatus : ${types}">
+                <td th:text="${tcStatus.count}"></td>
+                <td><a th:href="@{/view-type/{id}(id=${tc.getId()})}" th:text="${tc.getName()}"></a></td>
+                <td><a th:href="@{/update-type/{id}(id=${tc.getId()})}">Update</a></td>
+                <td><a th:href="@{/delete-type/{id}(id=${tc.getId()})}">Delete</a></td>
+            </tr>
+        </tbody>
+    </table>
+    <footer th:replace="/another_view/layout :: footer"></footer>
+
+</body>
+</html>
